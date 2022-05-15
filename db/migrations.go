@@ -10,7 +10,9 @@ func ExecMigrations(env string) {
 		Conect().Migrator().DropTable("sizes")
 		Conect().Migrator().DropTable("measures")
 		Conect().Migrator().DropTable("categories")
+		Conect().Migrator().DropTable("providers")
 		Conect().Migrator().DropTable("products")
+		Conect().Migrator().DropTable("product_providers")
 		Conect().Migrator().DropTable("product_variations")
 		Conect().Migrator().DropTable("product_variation_prices")
 		Conect().Migrator().DropTable("user")
@@ -21,12 +23,14 @@ func ExecMigrations(env string) {
 		&models.Measure{},
 		&models.Category{},
 		&models.Size{},
+		&models.Provider{},
 		&models.Product{},
+		&models.ProductProvider{},
 		&models.ProductVariation{},
 		&models.ProductVariationPrice{},
 
 		&models.User{},
 	)
 
-    println("all tables migrate")
+    println("All tables migrate!")
 }

@@ -12,7 +12,7 @@ func GetEnvironments() {
 	err := godotenv.Load()
 
 	if err != nil {
-		println("the enviroment file no")
+		println("The enviroment file no exis!")
 		os.Exit(1)
 	}
 
@@ -23,5 +23,5 @@ func GetEnvironments() {
 	DbPort = os.Getenv("DBPORT")
 	DbName = os.Getenv("DBNAME")
 
-	println("all environments are set")
+	println("All environments are set!")
 }

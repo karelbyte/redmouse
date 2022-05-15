@@ -14,8 +14,8 @@ type Provider struct {
 	Rfc         string         `gorm:"type:varchar(10)" json:"rfc"`
 	Email1      string         `gorm:"type:varchar(100)" json:"email1"`
 	Email2      string         `gorm:"type:varchar(100)" json:"email2"`
-	Phone1      string         `gorm:"type:varchar(2o)" json:"phone1"`
-	Phone2      string         `gorm:"type:varchar(2o)" json:"phone2"`
+	Phone1      string         `gorm:"type:varchar(20)" json:"phone1"`
+	Phone2      string         `gorm:"type:varchar(20)" json:"phone2"`
 	CreatedAt   time.Time      `json:"created_at"`
 	UpdatedAt   time.Time      `json:"updated_at"`
 	DeletedAt   gorm.DeletedAt `gorm:"index" json:"-"`
