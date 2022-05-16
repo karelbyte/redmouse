@@ -15,6 +15,12 @@ func ExecMigrations(env string) {
 		Conect().Migrator().DropTable("product_providers")
 		Conect().Migrator().DropTable("product_variations")
 		Conect().Migrator().DropTable("product_variation_prices")
+		Conect().Migrator().DropTable("receptions")
+		Conect().Migrator().DropTable("reception_products")
+		Conect().Migrator().DropTable("outputs")
+		Conect().Migrator().DropTable("output_products")
+		Conect().Migrator().DropTable("adjustment")
+		Conect().Migrator().DropTable("adjustment_products")
 		Conect().Migrator().DropTable("user")
 	}
 
@@ -28,7 +34,12 @@ func ExecMigrations(env string) {
 		&models.ProductProvider{},
 		&models.ProductVariation{},
 		&models.ProductVariationPrice{},
-
+		&models.Reception{},
+		&models.ReceptionProduct{},
+		&models.Output{},
+		&models.OuputProduct{},
+		&models.Adjustment{},
+		&models.AjustmentProduct{},
 		&models.User{},
 	)
 
