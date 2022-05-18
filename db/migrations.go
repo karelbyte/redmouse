@@ -1,11 +1,14 @@
 package db
 
-import "elpuertodigital/redmouse/models"
+import (
+	"elpuertodigital/redmouse/models"
+	"os"
+)
 
+func ExecMigrations() {
 
-func ExecMigrations(env string) {
-
-	if (env == "local") {
+	env := os.Getenv("APP_ENV")
+	if env == "local" {
 		Conect().Migrator().DropTable("colors")
 		Conect().Migrator().DropTable("sizes")
 		Conect().Migrator().DropTable("measures")
@@ -57,5 +60,5 @@ func ExecMigrations(env string) {
 		&models.User{},
 	)
 
-    println("All tables migrate!")
+	println("All tables migrate!")
 }

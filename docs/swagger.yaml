@@ -1,0 +1,36 @@
+basePath: /measures
+definitions:
+  models.Measure:
+    properties:
+      created_at:
+        type: string
+      description:
+        type: string
+      id:
+        type: string
+      updated_at:
+        type: string
+    type: object
+info:
+  contact: {}
+  title: Redmouse API documentation.
+  version: 1.0.0
+paths:
+  /api/measures:
+    get:
+      description: get all measures
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.Measure'
+            type: array
+        "404":
+          description: Not Found
+          schema:
+            type: object
+      summary: Get all measures
+      tags:
+      - Measures
+swagger: "2.0"

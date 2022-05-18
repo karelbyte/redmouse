@@ -5,7 +5,7 @@ import (
 	"os"
 )
 
-var AppEnv, DbHost, DbUser, DbPassword, DbPort, DbName string
+var AppEnv, DbHost, DbUser, DbPassword, DbPort, DbName, AppRouterPort string
 
 func GetEnvironments() {
 
@@ -17,6 +17,7 @@ func GetEnvironments() {
 	}
 
 	AppEnv = os.Getenv("APP_ENV")
+
 	DbHost = os.Getenv("DBHOST")
 	DbUser = os.Getenv("DBUSER")
 	DbPassword = os.Getenv("DBPASSWORD")
