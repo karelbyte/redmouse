@@ -11,8 +11,10 @@ func ManagerApiRoutes(api *gin.RouterGroup) {
 	measure := api.Group("/measures")
 	{
 		measure.GET("/", controllers.GetMeasures)
-		// measure.POST("/", controller.CreateUser)
-		// measure.GET("/:id", controller.GetUserByID)
+		measure.POST("/", controllers.CreateMeasure)
+		measure.GET("/:id", controllers.GetMeasureByID)
+		measure.PUT("/:id", controllers.UpdateMeasureByID)
+		measure.DELETE("/:id", controllers.DeleteMeasureByID)
 	}
 
 }

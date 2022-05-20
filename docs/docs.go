@@ -40,12 +40,113 @@ const docTemplate = `{
                         }
                     }
                 }
+            },
+            "post": {
+                "description": "create measure",
+                "tags": [
+                    "Measures"
+                ],
+                "summary": "Create measure",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/models.Measure"
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/measures/{id}": {
+            "get": {
+                "description": "find measure",
+                "tags": [
+                    "Measures"
+                ],
+                "summary": "Find measure",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/models.Measure"
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "update measure",
+                "tags": [
+                    "Measures"
+                ],
+                "summary": "Update measure",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/models.Measure"
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "description": "delete measure",
+                "tags": [
+                    "Measures"
+                ],
+                "summary": "Delete measure",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/models.Measure"
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "type": "object"
+                        }
+                    }
+                }
             }
         }
     },
     "definitions": {
         "models.Measure": {
             "type": "object",
+            "required": [
+                "description"
+            ],
             "properties": {
                 "created_at": {
                     "type": "string"
@@ -68,7 +169,7 @@ const docTemplate = `{
 var SwaggerInfo = &swag.Spec{
 	Version:          "1.0.0",
 	Host:             "",
-	BasePath:         "/measures",
+	BasePath:         "/api/*",
 	Schemes:          []string{},
 	Title:            "Redmouse API documentation.",
 	Description:      "",
