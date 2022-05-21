@@ -2,7 +2,6 @@ package http
 
 import (
 	"elpuertodigital/redmouse/controllers"
-
 	"github.com/gin-gonic/gin"
 )
 

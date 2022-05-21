@@ -19,14 +19,14 @@ var measure = models.Measure{}
 func GetMeasures(context *gin.Context) {
 	var measures []models.Measure
 	var count int64
-	db.Conect().Model(&measures).Count(&count)
+	db.Conect().Model(&models.Measure{}).Count(&count)
 	result := db.Conect().Scopes(Paginate(context)).Find(&measures)
 	if result.Error != nil {
-		context.JSON(200, gin.H{"error": "A ocurrido un error al obtener los datos."})
+		context.JSON(404, ErrorToGetData)
 		return
 	}
-	
-	context.JSON(200, gin.H{"data": measures, "total_rows": count })
+
+	context.JSON(200, gin.H{"data": measures, "total_rows": count})
 }
 
 // GetUsers ... Create measure
@@ -65,9 +65,9 @@ func GetMeasureByID(context *gin.Context) {
 		return
 	}
 	measure = models.Measure{ID: id}
-    result := db.Conect().Find(&measure)
+	result := db.Conect().Find(&measure)
 
-	if result.RowsAffected == 0 { 
+	if result.RowsAffected == 0 {
 		context.JSON(200, gin.H{})
 		return
 	}
@@ -77,7 +77,6 @@ func GetMeasureByID(context *gin.Context) {
 	}
 	context.JSON(200, measure)
 }
-
 
 // GetUsers ... Update measure
 // @Summary Update measure
@@ -93,8 +92,8 @@ func UpdateMeasureByID(context *gin.Context) {
 		context.JSON(200, gin.H{"id": context.Param("id"), "Error": err.Error()})
 		return
 	}
-	measureFind := models.Measure{ID: id}
-    result := db.Conect().Find(&measureFind)
+	itemToUpdate := models.Measure{ID: id}
+	result := db.Conect().Find(&itemToUpdate)
 	if result.Error != nil {
 		context.JSON(200, gin.H{"Error": result.Error})
 		return
@@ -103,12 +102,11 @@ func UpdateMeasureByID(context *gin.Context) {
 		context.JSON(200, gin.H{"error": err.Error()})
 		return
 	}
-	measureFind.Description = measure.Description
-	db.Conect().Save(&measureFind)
+	itemToUpdate.Description = measure.Description
+	db.Conect().Save(&itemToUpdate)
 
-	context.JSON(200, measureFind)
+	context.JSON(200, itemToUpdate)
 }
-
 
 // GetUsers ... Delete measure
 // @Summary Delete measure
@@ -124,9 +122,9 @@ func DeleteMeasureByID(context *gin.Context) {
 		context.JSON(200, gin.H{"id": context.Param("id"), "Error": err.Error()})
 		return
 	}
-	measureFind := models.Measure{ID: id}
-    result := db.Conect().Find(&measureFind)
-	if result.RowsAffected == 0 { 
+	itemToDelete := &models.Measure{ID: id}
+	result := db.Conect().Find(&itemToDelete)
+	if result.RowsAffected == 0 {
 		context.JSON(200, gin.H{})
 		return
 	}
@@ -134,7 +132,7 @@ func DeleteMeasureByID(context *gin.Context) {
 		context.JSON(200, gin.H{"Error": result.Error})
 		return
 	}
-	db.Conect().Delete(&measureFind)
+	db.Conect().Delete(&itemToDelete)
 
-	context.JSON(200, gin.H{"success": "Measure delete"})
+	context.JSON(200, gin.H{"success": "Item delete"})
 }

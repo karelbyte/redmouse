@@ -34,7 +34,7 @@ func ExecMigrations() {
 		Conect().Migrator().DropTable("user")
 	}
 
-	Conect().AutoMigrate(
+	err := Conect().AutoMigrate(
 		&models.Color{},
 		&models.Measure{},
 		&models.Category{},
@@ -59,6 +59,10 @@ func ExecMigrations() {
 		&models.Warehouse{},
 		&models.User{},
 	)
+
+	if err == nil && env == "local" {
+    //    MeasureSeed()
+	}
 
 	println("All tables migrate!")
 }

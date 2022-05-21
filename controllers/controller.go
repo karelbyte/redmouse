@@ -2,10 +2,11 @@ package controllers
 
 import (
 	"strconv"
-
 	"github.com/gin-gonic/gin"
 	"gorm.io/gorm"
 )
+
+var ErrorToGetData = gin.H{"error": "A ocurrido un error al obtener los datos."}
 
 func Paginate(context *gin.Context) func(db *gorm.DB) *gorm.DB {
 
@@ -15,6 +16,7 @@ func Paginate(context *gin.Context) func(db *gorm.DB) *gorm.DB {
 		pageSize, _ := strconv.Atoi(context.DefaultQuery("page_size", "10"))
 
 		println(page)
+		println(pageSize)
 
 		if int(page) == 0 {
 			page = 1
