@@ -6,6 +6,12 @@ import (
 	"gorm.io/gorm"
 )
 
+type Model interface {
+	Fill(data interface{})
+}
+
+var Payload interface{}
+
 var ErrorToGetData = gin.H{"error": "A ocurrido un error al obtener los datos."}
 
 func Paginate(context *gin.Context) func(db *gorm.DB) *gorm.DB {

@@ -7,9 +7,133 @@
     },
     "basePath": "/api/*",
     "paths": {
+        "/api/categories": {
+            "get": {
+                "description": "Get all categories, acept pagination ?page=1\u0026page_size=10",
+                "tags": [
+                    "Categories"
+                ],
+                "summary": "Get all categories",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/models.Category"
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "Create category, ej. {\"description\": \"new category name\"}",
+                "tags": [
+                    "Categories"
+                ],
+                "summary": "Create category",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/models.Category"
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/categories/{id}": {
+            "get": {
+                "description": "Find category",
+                "tags": [
+                    "Categories"
+                ],
+                "summary": "Find category",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/models.Category"
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "description": "Update category ej. {\"description\": \"update category name\"}",
+                "tags": [
+                    "Categories"
+                ],
+                "summary": "Update category",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/models.Category"
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "description": "Delete category",
+                "tags": [
+                    "Categories"
+                ],
+                "summary": "Delete category",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/models.Category"
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
         "/api/measures": {
             "get": {
-                "description": "get all measures",
+                "description": "Get all measures, acept pagination ?page=1\u0026page_size=10",
                 "tags": [
                     "Measures"
                 ],
@@ -33,7 +157,7 @@
                 }
             },
             "post": {
-                "description": "create measure",
+                "description": "Create measure, ej. {\"description\": \"new measure name\"}",
                 "tags": [
                     "Measures"
                 ],
@@ -59,7 +183,7 @@
         },
         "/api/measures/{id}": {
             "get": {
-                "description": "find measure",
+                "description": "Find measure",
                 "tags": [
                     "Measures"
                 ],
@@ -82,8 +206,8 @@
                     }
                 }
             },
-            "post": {
-                "description": "update measure",
+            "put": {
+                "description": "Update measure ej. {\"description\": \"update measure name\"}",
                 "tags": [
                     "Measures"
                 ],
@@ -107,7 +231,7 @@
                 }
             },
             "delete": {
-                "description": "delete measure",
+                "description": "Delete measure",
                 "tags": [
                     "Measures"
                 ],
@@ -130,9 +254,277 @@
                     }
                 }
             }
+        },
+        "/api/sizes": {
+            "get": {
+                "description": "Get all sizes, acept pagination ?page=1\u0026page_size=10",
+                "tags": [
+                    "Sizes"
+                ],
+                "summary": "Get all sizes",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/models.Size"
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "Create size, ej. {\"description\": \"new size name\"}",
+                "tags": [
+                    "Sizes"
+                ],
+                "summary": "Create size",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/models.Size"
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/sizes/{id}": {
+            "get": {
+                "description": "Find size",
+                "tags": [
+                    "Sizes"
+                ],
+                "summary": "Find size",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/models.Size"
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "description": "Update size ej. {\"description\": \"update size name\"}",
+                "tags": [
+                    "Sizes"
+                ],
+                "summary": "Update size",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/models.Size"
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "description": "Delete size",
+                "tags": [
+                    "Sizes"
+                ],
+                "summary": "Delete size",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/models.Size"
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/users": {
+            "get": {
+                "description": "Get all users, acept pagination ?page=1\u0026page_user=10",
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Get all users",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/models.User"
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "Create user, ej. {\"description\": \"new user name\"}",
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Create user",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/models.User"
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/users/{id}": {
+            "get": {
+                "description": "Find user",
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Find user",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/models.User"
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "description": "Update user ej. {\"description\": \"update user name\"}",
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Update user",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/models.User"
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "description": "Delete user",
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Delete user",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/models.User"
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "type": "object"
+                        }
+                    }
+                }
+            }
         }
     },
     "definitions": {
+        "models.Category": {
+            "type": "object",
+            "required": [
+                "description"
+            ],
+            "properties": {
+                "created_at": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "updated_at": {
+                    "type": "string"
+                }
+            }
+        },
         "models.Measure": {
             "type": "object",
             "required": [
@@ -147,6 +539,56 @@
                 },
                 "id": {
                     "type": "string"
+                },
+                "updated_at": {
+                    "type": "string"
+                }
+            }
+        },
+        "models.Size": {
+            "type": "object",
+            "required": [
+                "description"
+            ],
+            "properties": {
+                "created_at": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "updated_at": {
+                    "type": "string"
+                }
+            }
+        },
+        "models.User": {
+            "type": "object",
+            "required": [
+                "email",
+                "name"
+            ],
+            "properties": {
+                "created_at": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "boolean"
                 },
                 "updated_at": {
                     "type": "string"

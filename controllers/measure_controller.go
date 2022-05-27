@@ -11,7 +11,7 @@ var measure = models.Measure{}
 
 // GetUsers ... Get all measures
 // @Summary Get all measures
-// @Description get all measures
+// @Description Get all measures, acept pagination ?page=1&page_size=10
 // @Tags Measures
 // @Success 200 {array} models.Measure
 // @Failure 404 {object} object
@@ -20,8 +20,8 @@ func GetMeasures(context *gin.Context) {
 	var measures []models.Measure
 	var count int64
 	db.Conect().Model(&models.Measure{}).Count(&count)
-	result := db.Conect().Scopes(Paginate(context)).Find(&measures)
-	if result.Error != nil {
+
+	if result := db.Conect().Scopes(Paginate(context)).Find(&measures); result.Error != nil {
 		context.JSON(404, ErrorToGetData)
 		return
 	}
@@ -31,7 +31,7 @@ func GetMeasures(context *gin.Context) {
 
 // GetUsers ... Create measure
 // @Summary Create measure
-// @Description create measure
+// @Description Create measure, ej. {"description": "new measure name"}
 // @Tags Measures
 // @Success 200 {array} models.Measure
 // @Failure 404 {object} object
@@ -42,8 +42,8 @@ func CreateMeasure(context *gin.Context) {
 		context.JSON(200, gin.H{"error1": err.Error()})
 		return
 	}
-	result := db.Conect().Create(&measure)
-	if result.Error != nil {
+	
+	if result := db.Conect().Create(&measure); result.Error != nil {
 		context.JSON(200, gin.H{"error": result.Error})
 		return
 	}
@@ -52,7 +52,7 @@ func CreateMeasure(context *gin.Context) {
 
 // GetUsers ... Find measure
 // @Summary Find measure
-// @Description find measure
+// @Description Find measure
 // @Tags Measures
 // @Success 200 {array} models.Measure
 // @Failure 404 {object} object
@@ -64,9 +64,9 @@ func GetMeasureByID(context *gin.Context) {
 		context.JSON(200, gin.H{"id": context.Param("id"), "Error": err.Error()})
 		return
 	}
+
 	measure = models.Measure{ID: id}
 	result := db.Conect().Find(&measure)
-
 	if result.RowsAffected == 0 {
 		context.JSON(200, gin.H{})
 		return
@@ -75,12 +75,13 @@ func GetMeasureByID(context *gin.Context) {
 		context.JSON(200, gin.H{"Error": result.Error})
 		return
 	}
+
 	context.JSON(200, measure)
 }
 
 // GetUsers ... Update measure
 // @Summary Update measure
-// @Description update measure
+// @Description Update measure ej. {"description": "update measure name"}
 // @Tags Measures
 // @Success 200 {array} models.Measure
 // @Failure 404 {object} object
@@ -93,8 +94,7 @@ func UpdateMeasureByID(context *gin.Context) {
 		return
 	}
 	itemToUpdate := models.Measure{ID: id}
-	result := db.Conect().Find(&itemToUpdate)
-	if result.Error != nil {
+	if result := db.Conect().Find(&itemToUpdate); result.Error != nil {
 		context.JSON(200, gin.H{"Error": result.Error})
 		return
 	}
@@ -110,7 +110,7 @@ func UpdateMeasureByID(context *gin.Context) {
 
 // GetUsers ... Delete measure
 // @Summary Delete measure
-// @Description delete measure
+// @Description Delete measure
 // @Tags Measures
 // @Success 200 {array} models.Measure
 // @Failure 404 {object} object

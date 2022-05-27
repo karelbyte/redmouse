@@ -1,5 +1,18 @@
 basePath: /api/*
 definitions:
+  models.Category:
+    properties:
+      created_at:
+        type: string
+      description:
+        type: string
+      id:
+        type: string
+      updated_at:
+        type: string
+    required:
+    - description
+    type: object
   models.Measure:
     properties:
       created_at:
@@ -13,14 +26,129 @@ definitions:
     required:
     - description
     type: object
+  models.Size:
+    properties:
+      created_at:
+        type: string
+      description:
+        type: string
+      id:
+        type: string
+      updated_at:
+        type: string
+    required:
+    - description
+    type: object
+  models.User:
+    properties:
+      created_at:
+        type: string
+      description:
+        type: string
+      email:
+        type: string
+      id:
+        type: string
+      name:
+        type: string
+      status:
+        type: boolean
+      updated_at:
+        type: string
+    required:
+    - email
+    - name
+    type: object
 info:
   contact: {}
   title: Redmouse API documentation.
   version: 1.0.0
 paths:
+  /api/categories:
+    get:
+      description: Get all categories, acept pagination ?page=1&page_size=10
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.Category'
+            type: array
+        "404":
+          description: Not Found
+          schema:
+            type: object
+      summary: Get all categories
+      tags:
+      - Categories
+    post:
+      description: 'Create category, ej. {"description": "new category name"}'
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.Category'
+            type: array
+        "404":
+          description: Not Found
+          schema:
+            type: object
+      summary: Create category
+      tags:
+      - Categories
+  /api/categories/{id}:
+    delete:
+      description: Delete category
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.Category'
+            type: array
+        "404":
+          description: Not Found
+          schema:
+            type: object
+      summary: Delete category
+      tags:
+      - Categories
+    get:
+      description: Find category
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.Category'
+            type: array
+        "404":
+          description: Not Found
+          schema:
+            type: object
+      summary: Find category
+      tags:
+      - Categories
+    put:
+      description: 'Update category ej. {"description": "update category name"}'
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.Category'
+            type: array
+        "404":
+          description: Not Found
+          schema:
+            type: object
+      summary: Update category
+      tags:
+      - Categories
   /api/measures:
     get:
-      description: get all measures
+      description: Get all measures, acept pagination ?page=1&page_size=10
       responses:
         "200":
           description: OK
@@ -36,7 +164,7 @@ paths:
       tags:
       - Measures
     post:
-      description: create measure
+      description: 'Create measure, ej. {"description": "new measure name"}'
       responses:
         "200":
           description: OK
@@ -53,7 +181,7 @@ paths:
       - Measures
   /api/measures/{id}:
     delete:
-      description: delete measure
+      description: Delete measure
       responses:
         "200":
           description: OK
@@ -69,7 +197,7 @@ paths:
       tags:
       - Measures
     get:
-      description: find measure
+      description: Find measure
       responses:
         "200":
           description: OK
@@ -84,8 +212,8 @@ paths:
       summary: Find measure
       tags:
       - Measures
-    post:
-      description: update measure
+    put:
+      description: 'Update measure ej. {"description": "update measure name"}'
       responses:
         "200":
           description: OK
@@ -100,4 +228,168 @@ paths:
       summary: Update measure
       tags:
       - Measures
+  /api/sizes:
+    get:
+      description: Get all sizes, acept pagination ?page=1&page_size=10
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.Size'
+            type: array
+        "404":
+          description: Not Found
+          schema:
+            type: object
+      summary: Get all sizes
+      tags:
+      - Sizes
+    post:
+      description: 'Create size, ej. {"description": "new size name"}'
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.Size'
+            type: array
+        "404":
+          description: Not Found
+          schema:
+            type: object
+      summary: Create size
+      tags:
+      - Sizes
+  /api/sizes/{id}:
+    delete:
+      description: Delete size
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.Size'
+            type: array
+        "404":
+          description: Not Found
+          schema:
+            type: object
+      summary: Delete size
+      tags:
+      - Sizes
+    get:
+      description: Find size
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.Size'
+            type: array
+        "404":
+          description: Not Found
+          schema:
+            type: object
+      summary: Find size
+      tags:
+      - Sizes
+    put:
+      description: 'Update size ej. {"description": "update size name"}'
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.Size'
+            type: array
+        "404":
+          description: Not Found
+          schema:
+            type: object
+      summary: Update size
+      tags:
+      - Sizes
+  /api/users:
+    get:
+      description: Get all users, acept pagination ?page=1&page_user=10
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.User'
+            type: array
+        "404":
+          description: Not Found
+          schema:
+            type: object
+      summary: Get all users
+      tags:
+      - Users
+    post:
+      description: 'Create user, ej. {"description": "new user name"}'
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.User'
+            type: array
+        "404":
+          description: Not Found
+          schema:
+            type: object
+      summary: Create user
+      tags:
+      - Users
+  /api/users/{id}:
+    delete:
+      description: Delete user
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.User'
+            type: array
+        "404":
+          description: Not Found
+          schema:
+            type: object
+      summary: Delete user
+      tags:
+      - Users
+    get:
+      description: Find user
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.User'
+            type: array
+        "404":
+          description: Not Found
+          schema:
+            type: object
+      summary: Find user
+      tags:
+      - Users
+    put:
+      description: 'Update user ej. {"description": "update user name"}'
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.User'
+            type: array
+        "404":
+          description: Not Found
+          schema:
+            type: object
+      summary: Update user
+      tags:
+      - Users
 swagger: "2.0"
