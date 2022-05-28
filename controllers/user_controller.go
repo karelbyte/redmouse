@@ -3,12 +3,9 @@ package controllers
 import (
 	"elpuertodigital/redmouse/db"
 	"elpuertodigital/redmouse/models"
-	"fmt"
-
-	//"fmt"
-
 	"github.com/gin-gonic/gin"
 	"github.com/google/uuid"
+	"github.com/jinzhu/copier"
 )
 
 var user = models.User{}
@@ -110,17 +107,21 @@ func UpdateUserByID(context *gin.Context) {
 		return
 	}
 
-	
-	if err:=models.FillModel(&itemToUpdate, Payload); err != nil {
-		fmt.Println(err.Error())
+	if err := models.FillModel(&itemToUpdate, Payload); err != nil {
+		context.JSON(200, gin.H{"error": err.Error()})
+		return
 	}
-
-
-	fmt.Println(itemToUpdate)
 
 	db.Conect().Save(&itemToUpdate)
 
-	context.JSON(200,itemToUpdate)
+	apiItem := models.APIUser{}
+	err = copier.CopyWithOption(&apiItem, &itemToUpdate, copier.Option{IgnoreEmpty: true, DeepCopy: true})
+	if err != nil {
+		context.JSON(200, gin.H{"Error": err.Error()})
+		return
+	}
+
+	context.JSON(200, apiItem)
 
 }
 
@@ -138,16 +139,19 @@ func DeleteUserByID(context *gin.Context) {
 		context.JSON(200, gin.H{"id": context.Param("id"), "Error": err.Error()})
 		return
 	}
+
 	itemToDelete := &models.User{ID: id}
-	result := db.Conect().Find(&itemToDelete)
+	result := db.Conect().Model(&user).Find(&itemToDelete)
 	if result.RowsAffected == 0 {
 		context.JSON(200, gin.H{})
 		return
 	}
+
 	if result.Error != nil {
 		context.JSON(200, gin.H{"Error": result.Error})
 		return
 	}
+
 	db.Conect().Delete(&itemToDelete)
 
 	context.JSON(200, gin.H{"success": "Item delete"})

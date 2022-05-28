@@ -42,7 +42,7 @@ func CreateCategory(context *gin.Context) {
 		context.JSON(200, gin.H{"error1": err.Error()})
 		return
 	}
-	
+
 	if result := db.Conect().Create(&category); result.Error != nil {
 		context.JSON(200, gin.H{"error": result.Error})
 		return
@@ -71,6 +71,7 @@ func GetCategoryByID(context *gin.Context) {
 		context.JSON(200, gin.H{})
 		return
 	}
+
 	if result.Error != nil {
 		context.JSON(200, gin.H{"Error": result.Error})
 		return
@@ -93,15 +94,18 @@ func UpdateCategoryByID(context *gin.Context) {
 		context.JSON(200, gin.H{"id": context.Param("id"), "Error": err.Error()})
 		return
 	}
+
 	itemToUpdate := models.Category{ID: id}
 	if result := db.Conect().Find(&itemToUpdate); result.Error != nil {
 		context.JSON(200, gin.H{"Error": result.Error})
 		return
 	}
+
 	if err := context.BindJSON(&category); err != nil {
 		context.JSON(200, gin.H{"error": err.Error()})
 		return
 	}
+
 	itemToUpdate.Description = category.Description
 	db.Conect().Save(&itemToUpdate)
 
@@ -122,16 +126,19 @@ func DeleteCategoryByID(context *gin.Context) {
 		context.JSON(200, gin.H{"id": context.Param("id"), "Error": err.Error()})
 		return
 	}
+
 	itemToDelete := &models.Category{ID: id}
 	result := db.Conect().Find(&itemToDelete)
 	if result.RowsAffected == 0 {
 		context.JSON(200, gin.H{})
 		return
 	}
+
 	if result.Error != nil {
 		context.JSON(200, gin.H{"Error": result.Error})
 		return
 	}
+
 	db.Conect().Delete(&itemToDelete)
 
 	context.JSON(200, gin.H{"success": "Item delete"})

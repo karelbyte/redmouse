@@ -12,12 +12,13 @@ func FillModel(model interface{}, data interface{}) error {
 		return errors.New("Error in data structure")
 	}
 	for key, element := range values {
-		SetField(model, key, element)
+		setField(model, key, element)
 	}
 	return nil
 }
 
-func SetField(model interface{}, name string, value interface{})  {
+func setField(model interface{}, name string, value interface{})  {
 	property := strings.Title(name)
 	reflect.ValueOf(model).Elem().FieldByName(property).Set(reflect.ValueOf(value))
 }
+

@@ -8,7 +8,7 @@ import (
 
 type AjustmentProduct struct {
 	ID                 uuid.UUID `gorm:"primaryKey;type:varchar(36)" json:"id"`
-	AdjustmentID        uuid.UUID
+	AdjustmentID       uuid.UUID
 	Adjustment         Adjustment
 	ProductVariationID uuid.UUID
 	ProductVariation   ProductVariation

@@ -71,6 +71,7 @@ func GetMeasureByID(context *gin.Context) {
 		context.JSON(200, gin.H{})
 		return
 	}
+	
 	if result.Error != nil {
 		context.JSON(200, gin.H{"Error": result.Error})
 		return
@@ -93,15 +94,18 @@ func UpdateMeasureByID(context *gin.Context) {
 		context.JSON(200, gin.H{"id": context.Param("id"), "Error": err.Error()})
 		return
 	}
+
 	itemToUpdate := models.Measure{ID: id}
 	if result := db.Conect().Find(&itemToUpdate); result.Error != nil {
 		context.JSON(200, gin.H{"Error": result.Error})
 		return
 	}
+
 	if err := context.BindJSON(&measure); err != nil {
 		context.JSON(200, gin.H{"error": err.Error()})
 		return
 	}
+
 	itemToUpdate.Description = measure.Description
 	db.Conect().Save(&itemToUpdate)
 
@@ -122,16 +126,19 @@ func DeleteMeasureByID(context *gin.Context) {
 		context.JSON(200, gin.H{"id": context.Param("id"), "Error": err.Error()})
 		return
 	}
+
 	itemToDelete := &models.Measure{ID: id}
 	result := db.Conect().Find(&itemToDelete)
 	if result.RowsAffected == 0 {
 		context.JSON(200, gin.H{})
 		return
 	}
+
 	if result.Error != nil {
 		context.JSON(200, gin.H{"Error": result.Error})
 		return
 	}
+
 	db.Conect().Delete(&itemToDelete)
 
 	context.JSON(200, gin.H{"success": "Item delete"})

@@ -7,6 +7,10 @@ import (
 
 func ManagerApiRoutes(api *gin.RouterGroup) {
 
+	auth := api.Group("/auth")
+	{
+		auth.POST("/login", controllers.Login)
+	}
 
 	user := api.Group("/users")
 	{
@@ -17,7 +21,6 @@ func ManagerApiRoutes(api *gin.RouterGroup) {
 		user.DELETE("/:id", controllers.DeleteUserByID)
 	}
 
-
 	measure := api.Group("/measures")
 	{
 		measure.GET("/", controllers.GetMeasures)
@@ -26,7 +29,6 @@ func ManagerApiRoutes(api *gin.RouterGroup) {
 		measure.PUT("/:id", controllers.UpdateMeasureByID)
 		measure.DELETE("/:id", controllers.DeleteMeasureByID)
 	}
-
 
 	category := api.Group("/categories")
 	{

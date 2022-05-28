@@ -93,15 +93,18 @@ func UpdateSizeByID(context *gin.Context) {
 		context.JSON(200, gin.H{"id": context.Param("id"), "Error": err.Error()})
 		return
 	}
+
 	itemToUpdate := models.Size{ID: id}
 	if result := db.Conect().Find(&itemToUpdate); result.Error != nil {
 		context.JSON(200, gin.H{"Error": result.Error})
 		return
 	}
+
 	if err := context.BindJSON(&size); err != nil {
 		context.JSON(200, gin.H{"error": err.Error()})
 		return
 	}
+
 	itemToUpdate.Description = size.Description
 	db.Conect().Save(&itemToUpdate)
 
@@ -122,16 +125,19 @@ func DeleteSizeByID(context *gin.Context) {
 		context.JSON(200, gin.H{"id": context.Param("id"), "Error": err.Error()})
 		return
 	}
+	
 	itemToDelete := &models.Size{ID: id}
 	result := db.Conect().Find(&itemToDelete)
 	if result.RowsAffected == 0 {
 		context.JSON(200, gin.H{})
 		return
 	}
+
 	if result.Error != nil {
 		context.JSON(200, gin.H{"Error": result.Error})
 		return
 	}
+
 	db.Conect().Delete(&itemToDelete)
 
 	context.JSON(200, gin.H{"success": "Item delete"})
