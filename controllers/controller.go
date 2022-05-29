@@ -1,9 +1,9 @@
 package controllers
 
 import (
-	"strconv"
 	"github.com/gin-gonic/gin"
 	"gorm.io/gorm"
+	"strconv"
 )
 
 type Model interface {
@@ -21,9 +21,6 @@ func Paginate(context *gin.Context) func(db *gorm.DB) *gorm.DB {
 		page, _ := strconv.Atoi(context.DefaultQuery("page", "1"))
 		pageSize, _ := strconv.Atoi(context.DefaultQuery("page_size", "10"))
 
-		println(page)
-		println(pageSize)
-
 		if int(page) == 0 {
 			page = 1
 		}
@@ -39,4 +36,8 @@ func Paginate(context *gin.Context) func(db *gorm.DB) *gorm.DB {
 
 		return db.Offset(offset).Limit(pageSize)
 	}
+}
+
+func RespondWithError(contex *gin.Context, code int, message interface{}) {
+	contex.AbortWithStatusJSON(code, gin.H{"error": message})
 }

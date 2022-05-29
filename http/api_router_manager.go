@@ -12,7 +12,7 @@ func ManagerApiRoutes(api *gin.RouterGroup) {
 		auth.POST("/login", controllers.Login)
 	}
 
-	user := api.Group("/users")
+	user := api.Group("/users").Use(controllers.AuthMiddleware())
 	{
 		user.GET("/", controllers.GetUsers)
 		user.POST("/", controllers.CreateUser)
@@ -21,7 +21,7 @@ func ManagerApiRoutes(api *gin.RouterGroup) {
 		user.DELETE("/:id", controllers.DeleteUserByID)
 	}
 
-	measure := api.Group("/measures")
+	measure := api.Group("/measures").Use(controllers.AuthMiddleware())
 	{
 		measure.GET("/", controllers.GetMeasures)
 		measure.POST("/", controllers.CreateMeasure)
@@ -30,7 +30,7 @@ func ManagerApiRoutes(api *gin.RouterGroup) {
 		measure.DELETE("/:id", controllers.DeleteMeasureByID)
 	}
 
-	category := api.Group("/categories")
+	category := api.Group("/categories").Use(controllers.AuthMiddleware())
 	{
 		category.GET("/", controllers.GetCategories)
 		category.POST("/", controllers.CreateCategory)
@@ -39,7 +39,7 @@ func ManagerApiRoutes(api *gin.RouterGroup) {
 		category.DELETE("/:id", controllers.DeleteCategoryByID)
 	}
 
-	size := api.Group("/sizes")
+	size := api.Group("/sizes").Use(controllers.AuthMiddleware())
 	{
 		size.GET("/", controllers.GetSizes)
 		size.POST("/", controllers.CreateSize)

@@ -1,17 +1,18 @@
 package http
 
 import (
-	"os"
+	_ "elpuertodigital/redmouse/docs"
 	"github.com/gin-contrib/static"
 	"github.com/gin-gonic/gin"
-	"github.com/swaggo/gin-swagger" 
-    "github.com/swaggo/files"
-	_"elpuertodigital/redmouse/docs"
+	"github.com/swaggo/files"
+	"github.com/swaggo/gin-swagger"
+	"os"
 )
 
 var api *gin.RouterGroup
 
-func Routes () {
+
+func Routes() {
 
 	gin.SetMode(gin.ReleaseMode)
 
@@ -23,7 +24,7 @@ func Routes () {
 
 	api = router.Group("/api")
 
-	ManagerApiRoutes(api);
+	ManagerApiRoutes(api)
 
 	router.GET("/help/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 
