@@ -8,8 +8,8 @@ import (
 
 type Product struct {
 	ID               uuid.UUID `gorm:"primaryKey;type:varchar(36)" json:"id"`
-	Description      string    `gorm:"type:varchar(500)" json:"description"`
-	Iva              int64 `gorm:"type:int" son:"iva"`
+	Description      string    `gorm:"type:varchar(500)" json:"description" binding:"required"`
+	Iva              int64 `gorm:"type:int" son:"iva" binding:"required"`
 	MeasureID        uuid.UUID
 	Measure          Measure
 	CategoryID       uuid.UUID

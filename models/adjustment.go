@@ -12,7 +12,7 @@ type Adjustment struct {
 	User                      User
 	WarehouseID               uuid.UUID
 	Warehouse                 Warehouse
-	Code                      string                     `gorm:"type:varchar(10)" json:"code"`
+	Code                      string                     `gorm:"type:varchar(10)" json:"code"  binding:"required"`
 	Note                      string                     `gorm:"type:varchar(255)" json:"note"`
 	Type                      string                     `gorm:"type:enum('output', 'reception');default:'output'"`
 	Status                    bool                       `gorm:"type:tinyint" json:"status"`

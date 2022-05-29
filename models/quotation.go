@@ -14,7 +14,7 @@ type Quotation struct {
 	Client      Client
 	WarehouseID uuid.UUID
 	Warehouse   Warehouse
-	Code        string         `gorm:"type:varchar(10)" json:"code"`
+	Code        string         `gorm:"type:varchar(10)" json:"code" binding:"required"`
 	Note        string         `gorm:"type:varchar(255)" json:"note"`
 	Status      bool           `gorm:"type:tinyint" json:"status"`
 	CreatedAt   time.Time      `json:"created_at"`

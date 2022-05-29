@@ -1,5 +1,19 @@
 basePath: /api/*
 definitions:
+  controllers.Autenticate:
+    properties:
+      expires_at:
+        type: integer
+      token:
+        type: string
+    type: object
+  controllers.Error:
+    properties:
+      code:
+        type: integer
+      message:
+        type: string
+    type: object
   models.Category:
     properties:
       created_at:
@@ -12,6 +26,19 @@ definitions:
         type: string
     required:
     - description
+    type: object
+  models.Color:
+    properties:
+      created_at:
+        type: string
+      description:
+        type: string
+      id:
+        type: string
+      tone:
+        type: string
+      updated_at:
+        type: string
     type: object
   models.Measure:
     properties:
@@ -49,7 +76,9 @@ definitions:
         type: string
       id:
         type: string
-      name:
+      names:
+        type: string
+      password:
         type: string
       status:
         type: boolean
@@ -57,7 +86,8 @@ definitions:
         type: string
     required:
     - email
-    - name
+    - names
+    - password
     type: object
 info:
   contact: {}
@@ -146,6 +176,88 @@ paths:
       summary: Update category
       tags:
       - Categories
+  /api/colors:
+    get:
+      description: Get all colors, acept pagination ?page=1&page_color=10
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.Color'
+            type: array
+        "404":
+          description: Not Found
+          schema:
+            type: object
+      summary: Get all colors
+      tags:
+      - Colors
+    post:
+      description: 'Create color, ej. {"description": "new color name"}'
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.Color'
+            type: array
+        "404":
+          description: Not Found
+          schema:
+            type: object
+      summary: Create color
+      tags:
+      - Colors
+  /api/colors/{id}:
+    delete:
+      description: Delete color
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.Color'
+            type: array
+        "404":
+          description: Not Found
+          schema:
+            type: object
+      summary: Delete color
+      tags:
+      - Colors
+    get:
+      description: Find color
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.Color'
+            type: array
+        "404":
+          description: Not Found
+          schema:
+            type: object
+      summary: Find color
+      tags:
+      - Colors
+    put:
+      description: 'Update color ej. {"description": "update color name"}'
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.Color'
+            type: array
+        "404":
+          description: Not Found
+          schema:
+            type: object
+      summary: Update color
+      tags:
+      - Colors
   /api/measures:
     get:
       description: Get all measures, acept pagination ?page=1&page_size=10
@@ -392,4 +504,22 @@ paths:
       summary: Update user
       tags:
       - Users
+  /auth/login:
+    post:
+      description: 'Register user, acept in json body: {"email": "jondoe@domain.com","password":
+        "1234Aaaa&&d++"}'
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/controllers.Autenticate'
+            type: array
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/controllers.Error'
+      summary: Longin register user
+      tags:
+      - Auth
 swagger: "2.0"

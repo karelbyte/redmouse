@@ -3,7 +3,6 @@ package main
 import (
 	"elpuertodigital/redmouse/db"
 	"elpuertodigital/redmouse/http"
-
 	"github.com/gin-gonic/gin"
 )
 

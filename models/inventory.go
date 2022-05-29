@@ -12,7 +12,7 @@ type Inventory struct {
 	Warehouse          Warehouse
 	ProductVariationID uuid.UUID
 	ProductVariation   ProductVariation
-	Quantity           int64          `gorm:"type:int" json:"price"`
+	Quantity           int64          `gorm:"type:int" json:"Quantity" binding:"required"`
 	MinInStock         int64          `gorm:"type:int" json:"min_in_stock"`
 	Status             bool           `gorm:"type:tinyint" json:"status"`
 	CreatedAt          time.Time      `json:"created_at"`

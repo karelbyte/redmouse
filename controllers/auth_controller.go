@@ -6,10 +6,12 @@ import (
 	"elpuertodigital/redmouse/db"
 	"elpuertodigital/redmouse/models"
 	"errors"
-	"time"
 	"github.com/dgrijalva/jwt-go"
 	"github.com/gin-gonic/gin"
+	"time"
 )
+
+const SeventyTwoHours = 72
 
 type (
 	auth struct {
@@ -21,6 +23,16 @@ type (
 		Email string `json:"email"`
 		Names string `json:"names"`
 		jwt.StandardClaims
+	}
+
+	Autenticate struct {
+		Token     string `json:"token"`
+		ExpiresAt int64  `json:"expires_at"`
+	}
+
+	Error struct {
+		Code    int    `json:"code"`
+		Message string `json:"message"`
 	}
 )
 
@@ -36,6 +48,13 @@ var (
 	tokenInvalid = errors.New("Invalid token")
 )
 
+// GetUsers ... Login
+// @Summary Longin register user
+// @Description Register user, acept in json body: {"email": "jondoe@domain.com","password": "1234Aaaa&&d++"}
+// @Tags Auth
+// @Success 200 {array} controllers.Autenticate
+// @Failure 401 {object} Error
+// @Router /auth/login [post]
 func Login(context *gin.Context) {
 
 	if err := context.BindJSON(&credentials); err != nil {
@@ -71,7 +90,7 @@ func Login(context *gin.Context) {
 
 func generateToken(user models.User) (string, int64, error) {
 
-	expirationTime := time.Now().Add(72 * time.Hour)
+	expirationTime := time.Now().Add(SeventyTwoHours * time.Hour)
 
 	claims := &Claims{
 		Email: user.Email,
@@ -146,12 +165,14 @@ func AuthMiddleware() gin.HandlerFunc {
 			return
 		}
 
-		_, err := checkValidToken(tokenString)
+		user, err := checkValidToken(tokenString)
 		if err != nil {
 			context.JSON(401, gin.H{"Error": err.Error()})
 			context.Abort()
 			return
 		}
+
+		context.Set("userId", user.ID.String())
 
 		context.Next()
 

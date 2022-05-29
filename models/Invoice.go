@@ -12,7 +12,7 @@ type Invoice struct {
 	User      User
 	ClientID  uuid.UUID
 	Client    Client
-	Code      string         `gorm:"type:varchar(10)" json:"code"`
+	Code      string         `gorm:"type:varchar(10)" json:"code" binding:"required"`
 	Note      string         `gorm:"type:varchar(255)" json:"note"`
 	Status    bool           `gorm:"type:tinyint" json:"status"`
 	CreatedAt time.Time      `json:"created_at"`

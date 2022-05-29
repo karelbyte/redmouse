@@ -12,7 +12,7 @@ type ProductVariationHistoric struct {
 	ProductVariation   ProductVariation
 	DocumentID         uuid.UUID
 	DocumentType       string
-	Quantity           int64          `gorm:"type:int"`
+	Quantity           int64          `gorm:"type:int" json:"quantity" binding:"required"`
 	CreatedAt          time.Time      `json:"created_at"`
 	UpdatedAt          time.Time      `json:"updated_at"`
 	DeletedAt          gorm.DeletedAt `gorm:"index" json:"-"`

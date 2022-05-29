@@ -3,6 +3,8 @@ package controllers
 import (
 	"elpuertodigital/redmouse/db"
 	"elpuertodigital/redmouse/models"
+	"fmt"
+
 	"github.com/gin-gonic/gin"
 	"github.com/google/uuid"
 	"github.com/jinzhu/copier"
@@ -21,6 +23,10 @@ func GetUsers(context *gin.Context) {
 
 	var users []models.APIUser
 	var count int64
+
+	userId := context.GetString("userId")
+
+	fmt.Println(userId)
 
 	db.Conect().Model(&user).Count(&count)
 	if result := db.Conect().Model(&user).Scopes(Paginate(context)).Find(&users); result.Error != nil {

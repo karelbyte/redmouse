@@ -8,8 +8,8 @@ import (
 
 type ProductVariation struct {
 	ID               uuid.UUID `gorm:"primaryKey;type:varchar(36)" json:"id"`
-	Code             string    `gorm:"type:varchar(255)" json:"code"`
-	ShortDescription string    `gorm:"type:varchar(255)" json:"name"`
+	Code             string    `gorm:"type:varchar(255)" json:"code" binding:"required"`
+	ShortDescription string    `gorm:"type:varchar(255)" json:"name" binding:"required"`
 	Description      string    `gorm:"type:varchar(500)" json:"description"`
 	ProductID        uuid.UUID
 	Product          Product

@@ -12,7 +12,7 @@ type ReceptionProduct struct {
 	Reception          Reception
 	ProductVariationID uuid.UUID
 	ProductVariation   ProductVariation
-	Quantity           int32          `gorm:"type:varchar(10)" json:"quantity"`
+	Quantity           int32          `gorm:"type:varchar(10)" json:"quantity" binding:"required"`
 	CreatedAt          time.Time      `json:"created_at"`
 	UpdatedAt          time.Time      `json:"updated_at"`
 	DeletedAt          gorm.DeletedAt `gorm:"index" json:"-"`
