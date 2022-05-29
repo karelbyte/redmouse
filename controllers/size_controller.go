@@ -95,11 +95,17 @@ func UpdateSizeByID(context *gin.Context) {
 	}
 
 	itemToUpdate := models.Size{ID: id}
-	if result := db.Conect().Find(&itemToUpdate); result.Error != nil {
+	result := db.Conect().Find(&itemToUpdate);
+	if  result.Error != nil {
 		context.JSON(200, gin.H{"Error": result.Error})
 		return
 	}
 
+	if result.RowsAffected == 0 {
+		context.JSON(200, gin.H{})
+		return
+	}
+	
 	if err := context.BindJSON(&size); err != nil {
 		context.JSON(200, gin.H{"error": err.Error()})
 		return

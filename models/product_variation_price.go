@@ -8,10 +8,10 @@ import (
 
 type ProductVariationPrice struct {
 	ID                 uuid.UUID `gorm:"primaryKey;type:varchar(36)" json:"id"`
-	Code               string    `gorm:"type:varchar(255)" json:"code" binding:"required"`
+	Code               string    `gorm:"type:varchar(255);not null" json:"code" binding:"required"`
 	ShortDescription   string    `gorm:"type:varchar(255)" json:"name" binding:"required"`
-	Price              float64   `gorm:"type:decimal(12,2)" json:"price" binding:"required"`
-	ProductVariationID uuid.UUID
+	Price              float64   `gorm:"type:decimal(12,2);not null" json:"price" binding:"required"`
+	ProductVariationID uuid.UUID `gorm:"not null"`
 	ProductVariation   ProductVariation
 	CreatedAt          time.Time      `json:"created_at"`
 	UpdatedAt          time.Time      `json:"updated_at"`

@@ -39,7 +39,7 @@ func GetCategories(context *gin.Context) {
 func CreateCategory(context *gin.Context) {
 
 	if err := context.BindJSON(&category); err != nil {
-		context.JSON(200, gin.H{"error1": err.Error()})
+		context.JSON(200, gin.H{"error": err.Error()})
 		return
 	}
 
@@ -61,7 +61,7 @@ func GetCategoryByID(context *gin.Context) {
 
 	id, err := uuid.Parse(context.Param("id"))
 	if err != nil {
-		context.JSON(200, gin.H{"id": context.Param("id"), "Error": err.Error()})
+		context.JSON(200, gin.H{"id": context.Param("id"), "error": err.Error()})
 		return
 	}
 
@@ -73,7 +73,7 @@ func GetCategoryByID(context *gin.Context) {
 	}
 
 	if result.Error != nil {
-		context.JSON(200, gin.H{"Error": result.Error})
+		context.JSON(200, gin.H{"error": result.Error})
 		return
 	}
 
@@ -97,7 +97,7 @@ func UpdateCategoryByID(context *gin.Context) {
 
 	itemToUpdate := models.Category{ID: id}
 	if result := db.Conect().Find(&itemToUpdate); result.Error != nil {
-		context.JSON(200, gin.H{"Error": result.Error})
+		context.JSON(200, gin.H{"error": result.Error})
 		return
 	}
 
@@ -123,7 +123,7 @@ func DeleteCategoryByID(context *gin.Context) {
 
 	id, err := uuid.Parse(context.Param("id"))
 	if err != nil {
-		context.JSON(200, gin.H{"id": context.Param("id"), "Error": err.Error()})
+		context.JSON(200, gin.H{"id": context.Param("id"), "error": err.Error()})
 		return
 	}
 

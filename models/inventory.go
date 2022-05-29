@@ -8,11 +8,11 @@ import (
 
 type Inventory struct {
 	ID                 uuid.UUID `gorm:"primaryKey;type:varchar(36)" json:"id"`
-	WarehouseID        uuid.UUID
+	WarehouseID        uuid.UUID `gorm:"not null"`
 	Warehouse          Warehouse
-	ProductVariationID uuid.UUID
+	ProductVariationID uuid.UUID `gorm:"not null"`
 	ProductVariation   ProductVariation
-	Quantity           int64          `gorm:"type:int" json:"Quantity" binding:"required"`
+	Quantity           int64          `gorm:"type:int;not null" json:"quantity" binding:"required"`
 	MinInStock         int64          `gorm:"type:int" json:"min_in_stock"`
 	Status             bool           `gorm:"type:tinyint" json:"status"`
 	CreatedAt          time.Time      `json:"created_at"`

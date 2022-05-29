@@ -20,9 +20,9 @@ type (
 
 	User struct {
 		ID          uuid.UUID      `gorm:"primaryKey;type:varchar(36)" json:"id"`
-		Names       string         `gorm:"type:varchar(255)" json:"names" binding:"required"`
-		Email       string         `gorm:"type:varchar(255)" json:"email" binding:"required"`
-		Password    string         `gorm:"type:varchar(255)" json:"password" binding:"required"`
+		Names       string         `gorm:"type:varchar(255);not null" json:"names" binding:"required"`
+		Email       string         `gorm:"type:varchar(255);not null" json:"email" binding:"required"`
+		Password    string         `gorm:"type:varchar(255);not null" json:"password" binding:"required"`
 		Status      bool           `gorm:"type:tinyint" json:"status"`
 		Description string         `gorm:"type:varchar(255)" json:"description"`
 		CreatedAt   time.Time      `json:"created_at"`

@@ -12,6 +12,25 @@ func ManagerApiRoutes(api *gin.RouterGroup) {
 		auth.POST("/login", controllers.Login)
 	}
 
+	client := api.Group("/clients") //.Use(controllers.AuthMiddleware())
+	{
+		client.GET("/", controllers.GetClients)
+		client.POST("/", controllers.CreateClient)
+		client.GET("/:id", controllers.GetClientByID)
+		client.PUT("/:id", controllers.UpdateClientByID)
+		client.DELETE("/:id", controllers.DeleteClientByID)
+	}
+	
+
+	provider := api.Group("/providers") //.Use(controllers.AuthMiddleware())
+	{
+		provider.GET("/", controllers.GetProviders)
+		provider.POST("/", controllers.CreateProvider)
+		provider.GET("/:id", controllers.GetProviderByID)
+		provider.PUT("/:id", controllers.UpdateProviderByID)
+		provider.DELETE("/:id", controllers.DeleteProviderByID)
+	}
+
 	user := api.Group("/users").Use(controllers.AuthMiddleware())
 	{
 		user.GET("/", controllers.GetUsers)

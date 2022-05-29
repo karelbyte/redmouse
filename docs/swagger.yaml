@@ -39,6 +39,9 @@ definitions:
         type: string
       updated_at:
         type: string
+    required:
+    - description
+    - tone
     type: object
   models.Measure:
     properties:
@@ -52,6 +55,34 @@ definitions:
         type: string
     required:
     - description
+    type: object
+  models.Provider:
+    properties:
+      adress:
+        type: string
+      created_at:
+        type: string
+      description:
+        type: string
+      email1:
+        type: string
+      email2:
+        type: string
+      id:
+        type: string
+      names:
+        type: string
+      phone1:
+        type: string
+      phone2:
+        type: string
+      rfc:
+        type: string
+      updated_at:
+        type: string
+    required:
+    - email1
+    - names
     type: object
   models.Size:
     properties:
@@ -340,6 +371,88 @@ paths:
       summary: Update measure
       tags:
       - Measures
+  /api/providers:
+    get:
+      description: Get all providers, acept pagination ?page=1&page_provider=10
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.Provider'
+            type: array
+        "404":
+          description: Not Found
+          schema:
+            type: object
+      summary: Get all providers
+      tags:
+      - Providers
+    post:
+      description: 'Create provider, ej. {"description": "new provider name"}'
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.Provider'
+            type: array
+        "404":
+          description: Not Found
+          schema:
+            type: object
+      summary: Create provider
+      tags:
+      - Providers
+  /api/providers/{id}:
+    delete:
+      description: Delete provider
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.Provider'
+            type: array
+        "404":
+          description: Not Found
+          schema:
+            type: object
+      summary: Delete provider
+      tags:
+      - Providers
+    get:
+      description: Find provider
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.Provider'
+            type: array
+        "404":
+          description: Not Found
+          schema:
+            type: object
+      summary: Find provider
+      tags:
+      - Providers
+    put:
+      description: 'Update provider ej. {"description": "update provider name"}'
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.Provider'
+            type: array
+        "404":
+          description: Not Found
+          schema:
+            type: object
+      summary: Update provider
+      tags:
+      - Providers
   /api/sizes:
     get:
       description: Get all sizes, acept pagination ?page=1&page_size=10

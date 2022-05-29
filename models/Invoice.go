@@ -8,11 +8,11 @@ import (
 
 type Invoice struct {
 	ID        uuid.UUID `gorm:"primaryKey;type:varchar(36)" json:"id"`
-	UserID    uuid.UUID
+	UserID    uuid.UUID `gorm:"not null"`;
 	User      User
-	ClientID  uuid.UUID
+	ClientID  uuid.UUID `gorm:"not null"`;
 	Client    Client
-	Code      string         `gorm:"type:varchar(10)" json:"code" binding:"required"`
+	Code      string         `gorm:"type:varchar(10);not null" json:"code" binding:"required"`
 	Note      string         `gorm:"type:varchar(255)" json:"note"`
 	Status    bool           `gorm:"type:tinyint" json:"status"`
 	CreatedAt time.Time      `json:"created_at"`

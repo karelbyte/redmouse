@@ -8,9 +8,9 @@ import (
 
 type ProductProvider struct {
 	ID         uuid.UUID `gorm:"primaryKey;type:varchar(36)" json:"id"`
-	ProductID  uuid.UUID
+	ProductID  uuid.UUID `gorm:"not null"`;
 	Product    Product
-	ProviderID uuid.UUID
+	ProviderID uuid.UUID `gorm:"not null"`;
 	Provider   Provider
 	CreatedAt  time.Time      `json:"created_at"`
 	UpdatedAt  time.Time      `json:"updated_at"`

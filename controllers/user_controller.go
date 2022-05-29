@@ -55,7 +55,15 @@ func CreateUser(context *gin.Context) {
 		context.JSON(200, gin.H{"error": result.Error})
 		return
 	}
-	context.JSON(200, user)
+
+	apiItem := models.APIUser{}
+	err := copier.CopyWithOption(&apiItem, &user, copier.Option{IgnoreEmpty: true, DeepCopy: true})
+	if err != nil {
+		context.JSON(200, gin.H{"Error": err.Error()})
+		return
+	}
+
+	context.JSON(200, apiItem)
 }
 
 // GetUsers ... Find user
@@ -108,8 +116,14 @@ func UpdateUserByID(context *gin.Context) {
 	}
 
 	itemToUpdate := models.User{ID: id}
-	if result := db.Conect().Model(&user).Find(&itemToUpdate); result.Error != nil {
+	result := db.Conect().Model(&user).Find(&itemToUpdate);
+	if  result.Error != nil {
 		context.JSON(200, gin.H{"Error": result.Error})
+		return
+	}
+
+	if result.RowsAffected == 0 {
+		context.JSON(200, gin.H{})
 		return
 	}
 

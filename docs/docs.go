@@ -388,6 +388,130 @@ const docTemplate = `{
                 }
             }
         },
+        "/api/providers": {
+            "get": {
+                "description": "Get all providers, acept pagination ?page=1\u0026page_provider=10",
+                "tags": [
+                    "Providers"
+                ],
+                "summary": "Get all providers",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/models.Provider"
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "Create provider, ej. {\"description\": \"new provider name\"}",
+                "tags": [
+                    "Providers"
+                ],
+                "summary": "Create provider",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/models.Provider"
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/providers/{id}": {
+            "get": {
+                "description": "Find provider",
+                "tags": [
+                    "Providers"
+                ],
+                "summary": "Find provider",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/models.Provider"
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "description": "Update provider ej. {\"description\": \"update provider name\"}",
+                "tags": [
+                    "Providers"
+                ],
+                "summary": "Update provider",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/models.Provider"
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "description": "Delete provider",
+                "tags": [
+                    "Providers"
+                ],
+                "summary": "Delete provider",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/models.Provider"
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
         "/api/sizes": {
             "get": {
                 "description": "Get all sizes, acept pagination ?page=1\u0026page_size=10",
@@ -708,6 +832,10 @@ const docTemplate = `{
         },
         "models.Color": {
             "type": "object",
+            "required": [
+                "description",
+                "tone"
+            ],
             "properties": {
                 "created_at": {
                     "type": "string"
@@ -739,6 +867,48 @@ const docTemplate = `{
                     "type": "string"
                 },
                 "id": {
+                    "type": "string"
+                },
+                "updated_at": {
+                    "type": "string"
+                }
+            }
+        },
+        "models.Provider": {
+            "type": "object",
+            "required": [
+                "email1",
+                "names"
+            ],
+            "properties": {
+                "adress": {
+                    "type": "string"
+                },
+                "created_at": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "email1": {
+                    "type": "string"
+                },
+                "email2": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "names": {
+                    "type": "string"
+                },
+                "phone1": {
+                    "type": "string"
+                },
+                "phone2": {
+                    "type": "string"
+                },
+                "rfc": {
                     "type": "string"
                 },
                 "updated_at": {

@@ -8,11 +8,11 @@ import (
 
 type InvoiceProduct struct {
 	ID                 uuid.UUID `gorm:"primaryKey;type:varchar(36)" json:"id"`
-	InvoiceID          uuid.UUID
+	InvoiceID          uuid.UUID `gorm:"not null"`;
 	Invoice            Invoice
-	ProductVariationID uuid.UUID
+	ProductVariationID uuid.UUID `gorm:"not null"`;
 	ProductVariation   ProductVariation
-	Quantity           int32          `gorm:"type:varchar(10)" json:"quantity" binding:"required"`
+	Quantity           int32          `gorm:"type:int;not null" json:"quantity" binding:"required"`
 	CreatedAt          time.Time      `json:"created_at"`
 	UpdatedAt          time.Time      `json:"updated_at"`
 	DeletedAt          gorm.DeletedAt `gorm:"index" json:"-"`
