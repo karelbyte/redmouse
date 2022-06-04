@@ -10,9 +10,21 @@ func ManagerApiRoutes(api *gin.RouterGroup) {
 	auth := api.Group("/auth")
 	{
 		auth.POST("/login", controllers.Login)
+		
 	}
 
-	client := api.Group("/clients") //.Use(controllers.AuthMiddleware())
+
+	product := api.Group("/products")//.Use(controllers.AuthMiddleware())
+	{
+		product.GET("/", controllers.GetProducts)
+		product.POST("/", controllers.CreateProduct)
+		product.GET("/:id", controllers.GetProductByID)
+		product.PUT("/:id", controllers.UpdateProductByID)
+		product.DELETE("/:id", controllers.DeleteProductByID)
+	}
+
+
+	client := api.Group("/clients").Use(controllers.AuthMiddleware())
 	{
 		client.GET("/", controllers.GetClients)
 		client.POST("/", controllers.CreateClient)
@@ -22,7 +34,7 @@ func ManagerApiRoutes(api *gin.RouterGroup) {
 	}
 	
 
-	provider := api.Group("/providers") //.Use(controllers.AuthMiddleware())
+	provider := api.Group("/providers")//.Use(controllers.AuthMiddleware())
 	{
 		provider.GET("/", controllers.GetProviders)
 		provider.POST("/", controllers.CreateProvider)
@@ -31,7 +43,7 @@ func ManagerApiRoutes(api *gin.RouterGroup) {
 		provider.DELETE("/:id", controllers.DeleteProviderByID)
 	}
 
-	user := api.Group("/users").Use(controllers.AuthMiddleware())
+	user := api.Group("/users")//.Use(controllers.AuthMiddleware())
 	{
 		user.GET("/", controllers.GetUsers)
 		user.POST("/", controllers.CreateUser)
@@ -40,7 +52,7 @@ func ManagerApiRoutes(api *gin.RouterGroup) {
 		user.DELETE("/:id", controllers.DeleteUserByID)
 	}
 
-	measure := api.Group("/measures").Use(controllers.AuthMiddleware())
+	measure := api.Group("/measures")//.Use(controllers.AuthMiddleware())
 	{
 		measure.GET("/", controllers.GetMeasures)
 		measure.POST("/", controllers.CreateMeasure)
@@ -49,7 +61,7 @@ func ManagerApiRoutes(api *gin.RouterGroup) {
 		measure.DELETE("/:id", controllers.DeleteMeasureByID)
 	}
 
-	category := api.Group("/categories").Use(controllers.AuthMiddleware())
+	category := api.Group("/categories")//.Use(controllers.AuthMiddleware())
 	{
 		category.GET("/", controllers.GetCategories)
 		category.POST("/", controllers.CreateCategory)
@@ -58,7 +70,7 @@ func ManagerApiRoutes(api *gin.RouterGroup) {
 		category.DELETE("/:id", controllers.DeleteCategoryByID)
 	}
 
-	size := api.Group("/sizes").Use(controllers.AuthMiddleware())
+	size := api.Group("/sizes")//.Use(controllers.AuthMiddleware())
 	{
 		size.GET("/", controllers.GetSizes)
 		size.POST("/", controllers.CreateSize)

@@ -7,11 +7,12 @@ import (
 )
 
 type Measure struct {
-	ID        uuid.UUID `gorm:"primaryKey;type:varchar(36)" json:"id"`
-	Description string  `gorm:"type:varchar(255);not null" json:"description" binding:"required"`
-	CreatedAt time.Time `json:"created_at"`
-	UpdatedAt time.Time `json:"updated_at"`
-	DeletedAt gorm.DeletedAt `gorm:"index" json:"-"`
+	ID          uuid.UUID `gorm:"primaryKey;type:varchar(36)" json:"id"`
+	Description string    `gorm:"type:varchar(255);not null" json:"description" binding:"required"`
+	Products    []Product
+	CreatedAt   time.Time      `json:"created_at"`
+	UpdatedAt   time.Time      `json:"updated_at"`
+	DeletedAt   gorm.DeletedAt `gorm:"index" json:"-"`
 }
 
 func (measure *Measure) BeforeCreate(tx *gorm.DB) (err error) {

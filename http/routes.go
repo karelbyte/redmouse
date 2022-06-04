@@ -29,7 +29,8 @@ func Routes() {
 	router.GET("/help/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 
 	// This code is use to catch all routes that not match with "/api" and respose front app
-	router.NoRoute(ManagerFrontRoutes)
+	
+	// router.NoRoute(ManagerFrontRoutes)
 
 	appRouterPort := os.Getenv("APP_ROUTER_PORT")
 	router.Run(":" + appRouterPort)
