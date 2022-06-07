@@ -2,11 +2,12 @@ package db
 
 import (
 	"fmt"
+	"os"
+	"sync"
+	"entgo.io/ent/examples/fs/ent"
 	"gorm.io/driver/mysql"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
-	"os"
-	"sync"
 )
 
 type driverProperties struct {
@@ -39,7 +40,7 @@ var (
 
 	once sync.Once
 
-	instance *gorm.DB
+	instance *ent.Client
 )
 
 func (p *driverProperties) getDialect(host string, user string, password string, database string, port string) gorm.Dialector {
@@ -56,7 +57,7 @@ func (p *driverProperties) getDialect(host string, user string, password string,
 	return dial
 }
 
-func driverConection() gorm.Dialector {
+func driverConection() string {
 
 	driver = os.Getenv("DBDRIVER")
 
@@ -84,15 +85,15 @@ func driverConection() gorm.Dialector {
 
 	dialect := dialectors[driver]
 
-	return dialect.getDialect(host, user, password, database, port)
+	return  dialect.strConect//dialect.getDialect(host, user, password, database, port)
   
 }
 
 
-func Conect() *gorm.DB {
+func Conect() *ent.Client {
 
 	once.Do(func() {
-		instance, err = gorm.Open(driverConection(), &gorm.Config{})
+		instance, err = ent.Open(os.Getenv("DBDRIVER"), driverConection())
 	})
 
 	if err != nil {
@@ -101,4 +102,16 @@ func Conect() *gorm.DB {
 	}
 
 	return instance
+
+
+	// once.Do(func() {
+	// 	instance, err = gorm.Open(driverConection(), &gorm.Config{})
+	// })
+
+	// if err != nil {
+	// 	fmt.Print("Error: " + err.Error())
+	// 	os.Exit(1)
+	// }
+
+	// return instance
 }

@@ -13,7 +13,7 @@ func MeasureSeed() {
 	for range [15]int{} {
 		err := faker.FakeData(&measure)
 		if err == nil {
-			Conect().Create(&measure)
+			//Conect().Create(&measure)
 		} 
 	}	
 }
