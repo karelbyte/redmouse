@@ -52,11 +52,14 @@ func CreateProduct(context *gin.Context) {
 	// 	return
 	// }
 
-	if result := db.Conect().Model(&models.Product{}).Omit("Measure").Omit("Provider").Omit("Category").Create(&product); result.Error != nil {
+	if result := db.Conect().Model(&models.Product{}).Omit("Measure").Omit("Provider").Omit("Category").
+		Preload(clause.Associations).Create(&product); result.Error != nil {
 		context.JSON(200, gin.H{"error": result.Error})
 		return
 	}
 
+	db.Conect().Model(&models.Product{}).Preload(clause.Associations).Find(&product)
+	
 	context.JSON(200, product)
 }
 
